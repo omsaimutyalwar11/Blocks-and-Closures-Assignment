@@ -45,7 +45,7 @@ class CustomIntegerArray {
         return CustomIntegerArray(values: sortedStorage)
     }
 
-    func forEach(_ action: (Int) -> Void) {
+    func forEach(_ action: ForEachClosure) {
         for value in storage {
             action(value)
         }
