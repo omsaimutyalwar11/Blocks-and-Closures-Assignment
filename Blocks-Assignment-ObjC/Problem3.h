@@ -1,8 +1,19 @@
 // Objective C - Problem statment 3
 
-// The property must be copy because blocks are created on the stack by default.
-// If we only use strong, the block could be deallocated before it's executed.
-// Using copy ensures the block is copied to the heap, making it safe to use later.
+// Why the property must be copy?
+
+// A block is often created on the stack first. If that block is used after the current scope ends,
+// it must be moved to the heap so it remains valid.
+// `copy` documents the intent that this escaping block must live on the heap and be retained beyond the current frame.
+//
+// This is especially important under MRC: if a stack block is stored in a property without copying,
+// the underlying block can outlive the stack frame it was created on and become a dangling pointer.
+// In that case, calling it later may crash or behave unpredictably.
+//
+// Under ARC, assigning a block to a strong property still triggers a copy to the heap automatically,
+// so `strong` is functionally safe in this specific case. However, `copy` is still the more explicit
+// and semantically correct choice for an escaping block property because it communicates the lifetime
+// requirement clearly and preserves the correct behavior.
 typedef void (^FetchDataCompletion)(NSData *_Nullable data, NSError *_Nullable error);
 
 @interface DataProvider : NSObject

@@ -12,9 +12,9 @@ typedef void (^ForEachBlock)(NSInteger value);
 NS_DESIGNATED_INITIALIZER;
 - (instancetype)init NS_UNAVAILABLE;
 
-- (CustomIntegerArray *)filter:(FilterPredicateBlock)block;
-- (NSInteger)reduce:(ReduceBlock)block withInitial:(NSInteger)initial;
-- (CustomIntegerArray *)sortedArrayUsingBlock:(ComparisonBlock)block;
-- (void)forEach:(ForEachBlock)block;
+- (CustomIntegerArray *)filter:(nonnull FilterPredicateBlock)block;
+- (NSInteger)reduce:(nonnull ReduceBlock)block withInitial:(NSInteger)initial;
+- (CustomIntegerArray *)sortedArrayUsingBlock:(nonnull ComparisonBlock)block;
+- (void)forEach:(nonnull ForEachBlock)block;
 
 @end
